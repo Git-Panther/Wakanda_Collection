@@ -16,7 +16,7 @@ public class HashSetTest {
 		set.add(15);
 		set.add(new Date());
 		set.add(2.55);
-		set.add(new Character('c'));
+		set.add('c');
 		set.add(new MemberVo(1, "왕의 영역", new Date(1524300000000L)));
 		set.add(15); // 중복 저장 불가
 		set.remove(15); // 따라서 삭제하는 순간 15 값은 세트에 안 존재하게 됨
