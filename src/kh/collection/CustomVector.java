@@ -1,18 +1,20 @@
 package kh.collection;
 
-public class CustomVector {
-	private Object[] objArr;
+public class CustomVector<E, U> { // 제네릭 사용. 제네릭에 사용할 대문자로 개수 정할 수 있다.
+	private E[] objArr;
 	private int size;
 	
+	@SuppressWarnings("unchecked")
 	public CustomVector() {
 		// TODO Auto-generated constructor stub
 		size = 0; 
-		objArr = new Object[10]; // 기본값 10
+		objArr = (E[]) new Object[10]; // 기본값 10
 	}
 
+	@SuppressWarnings("unchecked")
 	public CustomVector(int capacity) {
 		size = 0;
-		objArr = new Object[capacity];
+		objArr = (E[]) new Object[capacity];
 	}
 	
 	public int capacity() {
@@ -30,15 +32,16 @@ public class CustomVector {
 		return false;
 	}
 	
-	public void add(Object i) {
-		Object[] copyArr = new Object[objArr.length * 2];
+	@SuppressWarnings("unchecked")
+	public void add(E e) {
+		E[] copyArr = (E[])new Object[objArr.length * 2];
 		
 		if(size == objArr.length) {
 			System.arraycopy(objArr, 0, copyArr, 0, objArr.length);
 			objArr = copyArr;
 		}
 		
-		objArr[size++] = i;
+		objArr[size++] = e;
 	}
 	
 	public Object get(int index) throws IndexOutOfBoundsException {
@@ -48,16 +51,16 @@ public class CustomVector {
 		return objArr[index];
 	}
 	
-	public int indexOf(Object obj) {
+	public int indexOf(E e) {
 		for(int index = 0; index < size; index++) {
-			if( obj.equals(objArr[index]) )
+			if( e.equals(objArr[index]) )
 				return index;
 		}
 		
 		return -1;
 	}
 	
-	public boolean remove(Object obj) {
+	public boolean remove(E e) {
 //		for(int index = 0; index < size; index++) {
 //			if( obj.equals(objArr[index]) ) {
 //				System.arraycopy(objArr, index + 1, objArr, index, (size - 1) - index); // 배열을 앞당긴다
@@ -67,7 +70,7 @@ public class CustomVector {
 //			}
 //		}
 		
-		int index = indexOf(obj);
+		int index = indexOf(e);
 		
 		if(index != -1)
 		{
@@ -85,11 +88,11 @@ public class CustomVector {
 		// TODO Auto-generated method stub
 		String message = "";
 		
-		for(Object obj : objArr) {
-			if(obj == null)
+		for(E e : objArr) {
+			if(e == null)
 				break;
 				
-			message += obj.toString() + "\t";
+			message += e.toString() + "\t";
 		}
 
 		return message;
